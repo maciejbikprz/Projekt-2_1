@@ -15,20 +15,24 @@
   })
 
   cw1.addEventListener("click", function() {
-    answer.innerHTML = "";
-    var list = answer.appendChild(document.createElement("ul"));
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json()).then(array => (array.forEach(element => {
-        var item = list.appendChild(document.createElement("li"));
-        item.innerHTML =
-          `<div>
-          <b>ID: ${element.id}</b>
-          <p><u>Title:</u><br> ${element.title}</p>
-          <p><u>Body:</u><br> ${element.body}</p>
-          <p><u>User ID:</u><br> ${element.userId}</p>
-          </div>`
+    answer.innerHTML = "Loading...";
+    setTimeout(function() {
+      answer.innerHTML = "";
+      var list = answer.appendChild(document.createElement("ul"));
+      fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json()).then(array => (array.forEach(element => {
+          var item = list.appendChild(document.createElement("li"));
+          item.innerHTML =
+            `<div>
+            <b>ID: ${element.id}</b>
+            <p><u>Title:</u><br> ${element.title}</p>
+            <p><u>Body:</u><br> ${element.body}</p>
+            <p><u>User ID:</u><br> ${element.userId}</p>
+            </div>`
 
-      })))
+        })))
+    }, 2000);
+
 
 
   })
