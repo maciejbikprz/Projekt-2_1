@@ -68,8 +68,35 @@
     fetchGET("https://jsonplaceholder.typicode.com/posts/" + select1.value);
   });
 
+
+  function fetchPOST() {
+    answer.innerHTML = "Processing...";
+
+    const newPost = {
+      title: "Mój nowy post",
+      body: "To jest przykładowa treść nowego posta.",
+      userId: 1
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify(newPost)
+    })
+      .then(response => response.json())
+      .then(data => {
+        answer.innerHTML = `Dodano nowy post o ID = ${data.id}`;
+        console.log("Odpowiedź serwera:", data);
+      });
+  }
+
+
+
   cw2.addEventListener("click", function() {
-    //TODO
+    fetchPOST();
+
   })
 
   cw3.addEventListener("click", function() {
